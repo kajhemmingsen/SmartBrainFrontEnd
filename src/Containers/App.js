@@ -110,12 +110,11 @@ class App extends Component {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-              input: this.state.user.input
+              input: this.state.input
             })
       })
       .then(response => response.json())
       .then(response => {
-        console.log('hi', response)
         if (response) {
           fetch('https://evening-hamlet-63194.herokuapp.com/image', {
             method: 'put',
@@ -170,3 +169,4 @@ class App extends Component {
 }
 
 export default App;
+
