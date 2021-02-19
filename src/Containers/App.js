@@ -106,16 +106,18 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input});
+      //fetch('http://localhost:4502/imageurl', {
       fetch('https://evening-hamlet-63194.herokuapp.com/imageurl', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-              input: this.state.input
-            })
+          body: JSON.stringify({
+          input: this.state.input
+        })
       })
       .then(response => response.json())
       .then(response => {
         if (response) {
+          //fetch('http://localhost:4502/image', {
           fetch('https://evening-hamlet-63194.herokuapp.com/image', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
@@ -123,10 +125,10 @@ class App extends Component {
               id: this.state.user.id
             })
           })
-            .then(response => response.json())
-            .then(count => {
-              this.setState(Object.assign(this.state.user, { entries: count}))
-            })
+          .then(response => response.json())
+          .then(count => {
+            this.setState(Object.assign(this.state.user, { entries: count}))
+          })
         }
         this.displayFaceBox(this.calculateFaceLocation(response))
       })
@@ -136,7 +138,8 @@ class App extends Component {
   onRouteChange = (route) => {
     this.setState({route: 'home'})
     if (route === 'signout') {
-      this.setState({initialState})
+      this.setState({isSignedIn: false})
+      this.setState({state: initialState})
     }
     else if (route === 'home') {
       this.setState({isSignedIn: true})
